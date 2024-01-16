@@ -151,7 +151,7 @@ if "submit_pressed" not in st.session_state:
 
 
 
-enter_url = st.sidebar.text_area("Paste an article content here",height=300)
+enter_url = st.sidebar.text_area("Paste an article content here",height=200)
 instuction=st.sidebar.text_area("Enter the instruction you want to give to Echo")
 
 
