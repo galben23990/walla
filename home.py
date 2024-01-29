@@ -18,72 +18,6 @@ from collections import defaultdict
 
 
 
-persona="""
-{
-  "persona": "Sapir Hadad",
-  "identity": {
-    "roles": ["Entrepreneur", "Tech Aficionado", "Visionary Leader"],
-    "interests": ["Technology", "Innovation", "Leaders;;;;hip", "Women in Tech"]
-  },
-  "style_of_writing": {
-    "tone": "Authentic, humorous, serious, slightly cynical, empathetic",
-    "examples": {
-      "tech_trends_post": "Just spotted another groundbreaking startup reshaping our world. Is it just me, or is the future arriving faster than ever? 🚀😉",
-      "leadership_thought_piece": "Leadership isn't just about guiding a team; it's about crafting a journey. Here's my take on turning challenges into stepping stones. 🌟🤔"
-    }
-  },
-  "content_preferences": {
-    "themes": ["Technology", "Innovation", "Startups", "Leadership", "Management", "Work-Life Balance", "Company Culture", "Product Development", "Women in Tech"]
-  },
-  "topics_with_expanded_sources": {
-    "technology_and_innovation": {
-      "themes": ["Latest trends", "New startups", "Significant funding rounds"],
-      "expanded_sources": {
-        "latest_trends": ["MIT Technology Review", "Wired", "TechCrunch"],
-        "new_startups": ["Startup Grind", "AngelList Blog", "VentureBeat"],
-        "funding_rounds": ["Crunchbase News", "PitchBook", "Forbes Tech"]
-      }
-    },
-    "leadership_and_management": {
-      "themes": ["Best practices", "Differences between leaders and managers", "Building positive work culture"],
-      "expanded_sources": {
-        "best_practices": ["McKinsey Insights", "Harvard Business Review", "Medium Leadership"],
-        "leaders_vs_managers": ["Forbes Leadership", "Inc. Leadership", "Simon Sinek Blog"],
-        "work_culture": ["Harvard Business Review", "Fast Company", "Gallup Workplace"]
-      }
-    },
-    "women_in_tech": {
-      "themes": ["Achievements and challenges", "Promoting inclusivity"],
-      "expanded_sources": {
-        "achievements_challenges": ["Women in Technology International", "The Muse", "Ellevate Network"],
-        "promoting_inclusivity": ["Fast Company", "Lean In", "AnitaB.org"]
-      }
-    }
-  },
-  "social_network_strategy": {
-    "LinkedIn": {
-      "content_type": "Professional insights, leadership articles",
-      "frequency": "3-4 times a week",
-      "example_post": "Exploring the fine line between leader and manager in today's fast-paced tech world."
-    },
-    "Twitter": {
-      "content_type": "Quick updates on tech trends, startup news",
-      "frequency": "1-2 times daily",
-      "example_post": "Just heard about a startup that's about to change the game in AI. Exciting times ahead! 🤖"
-    },
-    "Instagram": {
-      "content_type": "Personal branding, visual representation of tech and leadership concepts",
-      "frequency": "2-3 times a week",
-      "example_post": "A carousel post with key leadership tips."
-    },
-    "Facebook": {
-      "content_type": "Community engagement, sharing longer-form content",
-      "frequency": "2-3 times a week",
-      "example_post": "Reflecting on the importance of work-life balance in our always-on digital world."
-    }
-  }
-}
-"""
 
 if 'article_data' not in st.session_state:
     st.session_state['article_data'] = None
@@ -197,7 +131,7 @@ if st.sidebar.button("Submit"):
 
 
 
-start_index = 6 if st.session_state["submit_pressed"] else 2
+start_index =  3 if st.session_state["submit_pressed"] else 2
 for index, message in enumerate(st.session_state.messages):
     if index < start_index:
         continue
