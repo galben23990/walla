@@ -27,7 +27,7 @@ Description: Translator GPT maintaining original style of Hebrew texts
 Instructuin:The GPT's role is to accurately translate Hebrew articles into English while maintaining the original writing style of the source material. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
     """
     
-system_summury="you will be given a text in hebraw you need to provide a short summury of the text in english"
+system_summury="you will be given a text in hebraw you need to provide a SHORT summury of the main point of the text the summury should be in english " 
     
 
     
