@@ -15,6 +15,8 @@ import datetime as dt
 from datetime import datetime, timedelta
 from serpapi import GoogleSearch
 from collections import defaultdict
+import os
+
 
 
 
@@ -86,7 +88,14 @@ if "submit_pressed" not in st.session_state:
 
 
 
-enter_url = st.sidebar.text_area("Paste an article content here",height=125)
+# Directory where files are stored
+file_directory = 'files/'
+
+# List all files in the directory
+files = os.listdir(file_directory)
+
+# Dropdown to select a file
+selected_file = st.sidebar.selectbox("Select a file to translate", files)
 instuction=st.sidebar.text_area("Enter the instruction you want to give to Echo")
 
 
@@ -104,6 +113,13 @@ if "messages" not in st.session_state:
                                 {"role": "assistant", "content": "Hello,Please add article to translate"}]
 
 if st.sidebar.button("Submit"):
+    file_path = os.path.join(file_directory, selected_file)
+
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+        st.text_area("Article to translate", content, height=250)
+
+
     st.session_state["submit_pressed"] = True
     spinner_url = st.empty()
     expander_url = st.empty()
@@ -111,7 +127,7 @@ if st.sidebar.button("Submit"):
 
     with spinner_url.container(border=True):
         with st.spinner('Analyzing you content...'):
-            massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content": str(enter_url)}]
+            massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content": str(content)}]
             responce=ask_gpt(massage_history,response_format={"type": "text"})
 
     spinner_url.empty()
@@ -122,7 +138,7 @@ if st.sidebar.button("Submit"):
 
 
     
-    prompt=f"**AERTICLE TO TRANSLATE:**`{enter_url}`\ninstuction:`{instuction}`"
+    prompt=f"**AERTICLE TO TRANSLATE:**`{content}`\ninstuction:`{instuction}`"
     start_index = 3 if st.session_state["submit_pressed"] else 2
     for index, message in enumerate(st.session_state.messages):
         if index < start_index:
