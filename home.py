@@ -28,6 +28,7 @@ def chat_process(prompt,massage_history="",write_contetn=False):
     st.session_state.messages[0]["content"] = "YOUR NAME IS EditBot get use request and generated content and edit it by user request is it improtnetn to edit and not to change the content completly , you change it complety only if user requsteds the goal os to tanslete the orginal hebraw article ana naintaine the style"
 
     with st.chat_message("user"):
+      if "AERTICLE TO TRANSLATE" not in prompt:
         st.write(prompt)
 
     with st.chat_message("assistant"):
@@ -85,7 +86,7 @@ if "submit_pressed" not in st.session_state:
 
 
 
-enter_url = st.sidebar.text_area("Paste an article content here",height=150)
+enter_url = st.sidebar.text_area("Paste an article content here",height=125)
 instuction=st.sidebar.text_area("Enter the instruction you want to give to Echo")
 
 
@@ -98,13 +99,29 @@ if st.session_state['url_content'] is not None:
 # Variable to hold the content of the selected file
 data = None
 
-if "messages" not in st.session_state:
+if "messages" not in st.session_state:  
     st.session_state.messages = [{"role": "system", "content": system_pdf_chat},
                                 {"role": "assistant", "content": "Hello,Please add article to translate"}]
 
 if st.sidebar.button("Submit"):
     st.session_state["submit_pressed"] = True
-     
+    spinner_url = st.empty()
+    expander_url = st.empty()
+
+
+    with spinner_url.container(border=True):
+        with st.spinner('Analyzing you content...'):
+            massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content": str(enter_url)}]
+            responce=ask_gpt(massage_history,response_format={"type": "text"})
+
+    spinner_url.empty()
+    with expander_url.expander("✔️ Completed Expand to See the Content summury ", expanded=False):
+        st.write("The summury of the content in the url is:")
+        st.write(responce)
+        st.session_state['url_content'] = responce
+
+
+    
     prompt=f"**AERTICLE TO TRANSLATE:**`{enter_url}`\ninstuction:`{instuction}`"
     start_index = 3 if st.session_state["submit_pressed"] else 2
     for index, message in enumerate(st.session_state.messages):
@@ -142,5 +159,4 @@ if prompt := st.chat_input("What is up?"):
 
         
    
-
 
