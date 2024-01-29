@@ -106,7 +106,7 @@ if st.sidebar.button("Submit"):
     st.session_state["submit_pressed"] = True
      
     prompt=f"**AERTICLE TO TRANSLATE:**`{enter_url}`\ninstuction:`{instuction}`"
-    start_index = 3 st.session_state["submit_pressed"] else 2
+    start_index = 3 if st.session_state["submit_pressed"] else 2
     for index, message in enumerate(st.session_state.messages):
         if index < start_index:
             continue
