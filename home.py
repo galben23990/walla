@@ -1,5 +1,4 @@
 import openai
-import streamlit
 import streamlit as st
 from utils import *
 import os
@@ -13,7 +12,6 @@ from utiltes import *
 import time
 import datetime as dt
 from datetime import datetime, timedelta
-from serpapi import GoogleSearch
 from collections import defaultdict
 import os
 
@@ -66,7 +64,7 @@ def chat_process(prompt,massage_history="",write_contetn=False):
 
 
 #name with imoji
-st.title("TaseAI Bot🤖")
+st.title("TranBot🤖")
 
 x="sk-9xPQ9C50b"
 y="c1sYkg2yikQT3Bl"
@@ -85,7 +83,8 @@ if 'url_content' not in st.session_state:
 
 if "submit_pressed" not in st.session_state:
     st.session_state["submit_pressed"] = False
-
+if "orginal_content" not in st.session_state:
+    st.session_state["orginal_content"] = None
 
 
 # Directory where files are stored
@@ -117,24 +116,28 @@ if st.sidebar.button("Submit"):
     Name: Hebrew Style Translator
     Description: Translator GPT maintaining original style of Hebrew texts
     Instructuin:The GPT's role is to accurately translate Hebrew articles into {choose_language} while maintaining the original writing style of the source material. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
-        """      
+        """
+      
     #replace settime massage in sessions taet 
     st.session_state.messages[0]["content"] = system_pdf_chat
     file_path = os.path.join(file_directory, selected_file)
 
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-        st.text_area("Article to translate", content, height=250)
+        st.session_state["orginal_content"] = content
+        st.text_area("Article to translate",  st.session_state["orginal_content"], height=250)
 
 
     st.session_state["submit_pressed"] = True
     spinner_url = st.empty()
     expander_url = st.empty()
+    system_summury=f"you will be given a text in hebraw you need to provide a SHORT summury of the main point of the text the summury should be in {choose_language} " 
+
 
 
     with spinner_url.container(border=True):
         with st.spinner('Analyzing you content...'):
-            massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content": str(content)}]
+            massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content":f"please provide the summury of the following content in {choose_language}:\nThe Content: {str(content)}"}]
             responce=ask_gpt(massage_history,response_format={"type": "text"})
 
     spinner_url.empty()
