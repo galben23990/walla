@@ -117,9 +117,7 @@ if st.sidebar.button("Submit"):
     Name: Hebrew Style Translator
     Description: Translator GPT maintaining original style of Hebrew texts
     Instructuin:The GPT's role is to accurately translate Hebrew articles into {choose_language} while maintaining the original writing style of the source material. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
-        """
-    st.write(system_pdf_chat)
-      
+        """      
     #replace settime massage in sessions taet 
     st.session_state.messages[0]["content"] = system_pdf_chat
     file_path = os.path.join(file_directory, selected_file)
