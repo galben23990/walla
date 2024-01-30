@@ -96,9 +96,8 @@ files = os.listdir(file_directory)
 
 # Dropdown to select a file
 selected_file = st.sidebar.selectbox("Select a file to translate", files)
+choose_language=st.sidebar.selectbox("Select a language to translate to", ["English","French","German","Spanish","Italian","Portuguese","Russian","Chinese","Japanese","Arabic","Hebrew"])
 instuction=st.sidebar.text_area("Enter the instruction you want to give to Echo")
-
-
 if st.session_state['url_content'] is not None:
     with st.expander("✔️ Completed Expand to See the Content summury", expanded=True):
         st.write(st.session_state['url_content'])
@@ -108,11 +107,21 @@ if st.session_state['url_content'] is not None:
 # Variable to hold the content of the selected file
 data = None
 
-if "messages" not in st.session_state:  
-    st.session_state.messages = [{"role": "system", "content": system_pdf_chat},
+if "messages" not in st.session_state:   
+  #replace the word english with the traget language
+  st.session_state.messages = [{"role": "system", "content": system_pdf_chat},
                                 {"role": "assistant", "content": "Hello,Please add article to translate"}]
 
 if st.sidebar.button("Submit"):
+    system_pdf_chat=f"""
+    Name: Hebrew Style Translator
+    Description: Translator GPT maintaining original style of Hebrew texts
+    Instructuin:The GPT's role is to accurately translate Hebrew articles into {choose_language} while maintaining the original writing style of the source material. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
+        """
+    st.write(system_pdf_chat)
+      
+    #replace settime massage in sessions taet 
+    st.session_state.messages[0]["content"] = system_pdf_chat
     file_path = os.path.join(file_directory, selected_file)
 
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -138,7 +147,7 @@ if st.sidebar.button("Submit"):
 
 
     
-    prompt=f"**AERTICLE TO TRANSLATE:**`{content}`\ninstuction:`{instuction}`"
+    prompt=f"**AERTICLE TO TRANSLATE:**`{content}`\ninstuction:Translete to {choose_language}`{instuction}`"
     start_index = 3 if st.session_state["submit_pressed"] else 2
     for index, message in enumerate(st.session_state.messages):
         if index < start_index:
