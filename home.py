@@ -66,7 +66,7 @@ def chat_process(prompt,massage_history="",write_contetn=False):
 
 
 #name with imoji
-st.title("TranBot🤖")
+st.title("TaseAI Bot🤖")
 
 x="sk-9xPQ9C50b"
 y="c1sYkg2yikQT3Bl"
