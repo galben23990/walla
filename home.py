@@ -115,7 +115,7 @@ if st.sidebar.button("Submit"):
     system_pdf_chat=f"""
     Name: Hebrew Style Translator
     Description: Translator GPT maintaining original style of Hebrew texts
-    Instructuin:The GPT's role is to accurately translate Hebrew articles into {choose_language} while maintaining the original writing style of the source material. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
+    Instructuin:The GPT's role is to accurately translate Hebrew articles into {choose_language} while maintaining the original writing style of the source material and markdown strucutre. It should provide translations that are not only linguistically correct but also capture the essence, tone, and stylistic nuances of the original text. This GPT should avoid literal word-for-word translations that might lose the original context or stylistic elements. It should ask for clarification if the original text's meaning or style is ambiguous or unclear. The GPT should also be aware of cultural nuances in both languages to ensure a faithful and respectful translation.
         """
       
     #replace settime massage in sessions taet 
@@ -136,7 +136,7 @@ if st.sidebar.button("Submit"):
 
 
     with spinner_url.container(border=True):
-        with st.spinner('Analyzing you content...'):
+        with st.spinner('Analyzing your content...'):
             massage_history=[{"role": "system", "content": system_summury},{"role": "user", "content":f"please provide the summury of the following content in {choose_language}:\nThe Content: {str(content)}"}]
             responce=ask_gpt(massage_history,response_format={"type": "text"})
 
