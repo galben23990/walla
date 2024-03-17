@@ -66,9 +66,9 @@ def chat_process(prompt,massage_history="",write_contetn=False):
 #name with imoji
 st.title("TASEbot🤖")
 
-x="sk-9xPQ9C50b"
-y="c1sYkg2yikQT3Bl"
-z="bkFJ6jlVHQrpiJT3KZ9BmOMP"
+x="sk-tkeOafkVo7qY74Q"
+y="suO3WT3BlbkFJ0"
+z="cc6J4RFcHC0y2ZopE4S"
 
 
 openai.api_key = x+y+z
