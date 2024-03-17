@@ -19,9 +19,11 @@ from collections import defaultdict
 
 
 
-x="sk-9xPQ9C50b"
-y="c1sYkg2yikQT3Bl"
-z="bkFJ6jlVHQrpiJT3KZ9BmOMP"
+
+x="sk-tkeOafkVo7qY74Q"
+y="suO3WT3BlbkFJ0"
+z="cc6J4RFcHC0y2ZopE4S"
+
 
 openai.api_key = x+y+z
 openaiclient = openai.OpenAI(api_key=openai.api_key )
